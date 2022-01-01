@@ -19,8 +19,10 @@ app.get('/api/products', (req,res)=>{
 //filter futher via Id, get single product
 app.get('/api/products/:productId', (req,res)=>{
     console.log(req.params)
-   const singleProduct = products.find((product)=>product.id === Number(req.params.productId))
+   const singleProduct = products.find((product)=>product.id === Number(req.params.productId)
+   )
    //You can refactor Number(req.params.productId) => const {productId} = Number(req.params)
+   if(!singleProduct){return res.status(404).send("product not found")}
    res.json(singleProduct)
 })
 
