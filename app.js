@@ -30,6 +30,13 @@ app.post('/api/people', (req,res)=>{
     res.status(201).send({success:true,person:name})
 })
 
+//add people to the array using postman
+app.post('/api/postman/people', (req,res)=>{
+    const {name} = req.body
+    if(!name){return res.status(400).send({success:false, msg:"Please provide name"})}
+    res.status(201).send({success:true,data:[...people,{name}]})
+})
+
 
 app.listen(4000, ()=>{console.log("app is listening on port 4000" )})
 
