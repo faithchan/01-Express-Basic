@@ -9,9 +9,15 @@ app.get('/api/people', (req,res)=>{
     res.status(200).json({success:true, data:people})
 })
 
+//parse form data
+app.use(express.urlencoded({extended:false}))
+
 //Example of Post 
 app.post('/login', (req,res)=>{
-    res.send('POST')
+    console.log(req.body)
+    const {name} = req.body;
+    if(name){return res.status(200).send(`welcome ${name}`)}
+    res.status(401).send('Please provide credentials')
 })
 
 //
