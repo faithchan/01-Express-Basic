@@ -26,6 +26,22 @@ app.get('/api/products/:productId', (req,res)=>{
    res.json(singleProduct)
 })
 
+//query
+app.get('/api/v1/query', (req,res)=>{
+    //you have to include a ? after the url and you can add a & to query as many things
+    const {search, limit} = req.query;
+    let sortedProducts= [...products];
+
+    if(search){sortedProducts= sortedProducts.filter((product)=>{
+        return product.name.startsWith(search)
+    })}
+
+    if(limit){
+        sortedProducts = sortedProducts.slice(0, Number(limit))
+    }
+
+    res.status(200).json(sortedProducts)
+})
 
 
 app.listen(4000, ()=>{console.log("app is listening on port 4000" )})
