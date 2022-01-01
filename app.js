@@ -5,7 +5,7 @@ const authorize = require('./authorize')
 //req = > middleware => res
 
 //using multiple middleware on all routes
-app.use([yearLog, authorize])
+// app.use([yearLog, authorize])
 
 app.get('/',(req,res)=>{
 
@@ -16,7 +16,8 @@ app.get('/about',(req,res)=>{
     res.send('About')
 })
 
-app.get('/api/products',(req,res)=>{
+//example of passing two middlewares into a specific route
+app.get('/api/products',[yearLog, authorize],(req,res)=>{
     res.send('products')
 })
 
