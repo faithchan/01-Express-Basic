@@ -2,13 +2,17 @@ const express = require('express')
 const app = express();
 const yearLog = require('./logger')
 const authorize = require('./authorize')
+const morgan = require('morgan')
 //req = > middleware => res
 
 // Options of middleware - our own / express / third party
 //express
-app.use(express.static('./public'))
+// app.use(express.static('./public')) -express
 
-// app.use([yearLog, authorize]) -o ur own
+//third party
+app.use(morgan('tiny'))
+
+// app.use([yearLog, authorize]) -our own
 
 app.get('/',(req,res)=>{
 
@@ -20,7 +24,7 @@ app.get('/about',(req,res)=>{
 })
 
 //example of passing two middlewares into a specific route
-app.get('/api/products',[yearLog, authorize],(req,res)=>{
+app.get('/api/products',(req,res)=>{
     res.send('products')
 })
 
