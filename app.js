@@ -4,8 +4,11 @@ const yearLog = require('./logger')
 const authorize = require('./authorize')
 //req = > middleware => res
 
-//using multiple middleware on all routes
-// app.use([yearLog, authorize])
+// Options of middleware - our own / express / third party
+//express
+app.use(express.static('./public'))
+
+// app.use([yearLog, authorize]) -o ur own
 
 app.get('/',(req,res)=>{
 
