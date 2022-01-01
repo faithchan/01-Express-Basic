@@ -3,15 +3,23 @@ const app = express();
 const yearLog = require('./logger')
 //req = > middleware => res
 
+//middleware appplied to all routes
+app.use(yearLog)
 
-
-//add middleware manually here as a parameter
-app.get('/', yearLog ,(req,res)=>{
+app.get('/',(req,res)=>{
 
     res.send('Home')
 })
 app.get('/about',(req,res)=>{
     res.send('About')
+})
+
+app.get('/api/products',(req,res)=>{
+    res.send('products')
+})
+
+app.get('/api/items',(req,res)=>{
+    res.send('Items')
 })
 
 
