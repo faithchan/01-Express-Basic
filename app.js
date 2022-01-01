@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express();
 const yearLog = require('./logger')
+const authorize = require('./authorize')
 //req = > middleware => res
 
-//applying middleware to specifio routes e.g /api
-app.use('/api',yearLog)
+//using multiple middleware on all routes
+app.use([yearLog, authorize])
 
 app.get('/',(req,res)=>{
 
