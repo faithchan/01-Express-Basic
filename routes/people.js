@@ -2,25 +2,25 @@ const express = require('express')
 const router =express.Router();
 let {people} = require('../data')
 
-router.get('/api/people', (req,res)=>{
+router.get('/', (req,res)=>{
     res.status(200).json({success:true, data:people})
 })
 //add people
-router.post('/api/people', (req,res)=>{
+router.post('/', (req,res)=>{
     const {name} = req.body
     if(!name){return res.status(400).send({success:false, msg:"Please provide name"})}
     res.status(201).send({success:true,person:name})
 })
 
 //add people to the array using postman
-app.post('/api/people/postman', (req,res)=>{
+router.post('/postman', (req,res)=>{
     const {name} = req.body
     if(!name){return res.status(400).send({success:false, msg:"Please provide name"})}
     res.status(201).send({success:true,data:[...people,{name}]})
 })
 
 //update data of one person
-app.put('/api/people/:id', (req,res)=>{
+router.put('/:id', (req,res)=>{
 const {id} =req.params
 const {name} = req.body
 const person = people.find((person)=>{
@@ -38,7 +38,7 @@ res.status(200).json({success:true, data:newPeople})
 })
 
 //delete
-app.delete('/api/people/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const person = people.find((person) => person.id === Number(req.params.id))
     if (!person) {
       return res
