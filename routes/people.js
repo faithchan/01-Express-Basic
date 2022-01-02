@@ -1,11 +1,12 @@
 const express = require('express')
 const router =express.Router();
+let {people} = require('../data')
 
-app.get('/api/people', (req,res)=>{
+router.get('/api/people', (req,res)=>{
     res.status(200).json({success:true, data:people})
 })
 //add people
-app.post('/api/people', (req,res)=>{
+router.post('/api/people', (req,res)=>{
     const {name} = req.body
     if(!name){return res.status(400).send({success:false, msg:"Please provide name"})}
     res.status(201).send({success:true,person:name})
@@ -49,3 +50,5 @@ app.delete('/api/people/:id', (req, res) => {
     )
     return res.status(200).json({ success: true, data: newPeople })
   })
+
+  module.exports =router
